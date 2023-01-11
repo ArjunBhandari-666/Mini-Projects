@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.viewPager;
+package app.src.main.java.com.pushpal.googleplayclone.viewPager;
 
 import android.content.Context;
 import android.util.AttributeSet;

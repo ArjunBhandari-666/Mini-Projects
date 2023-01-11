@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone;
+package app.src.androidTest.java.com.pushpal.googleplayclone;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

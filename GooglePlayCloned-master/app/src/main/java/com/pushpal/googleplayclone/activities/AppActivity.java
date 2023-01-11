@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.activities;
+package app.src.main.java.com.pushpal.googleplayclone.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

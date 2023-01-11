@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.adapters;
+package app.src.main.java.com.pushpal.googleplayclone.adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

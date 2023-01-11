@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.adapters;
+package app.src.main.java.com.pushpal.googleplayclone.adapters;
 
 import android.content.Context;
 import android.content.Intent;

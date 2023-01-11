@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.application;
+package app.src.main.java.com.pushpal.googleplayclone.application;
 
 import android.app.Application;
 

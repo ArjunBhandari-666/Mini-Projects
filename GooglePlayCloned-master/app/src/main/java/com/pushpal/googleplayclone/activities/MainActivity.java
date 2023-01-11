@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.activities;
+package app.src.main.java.com.pushpal.googleplayclone.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;

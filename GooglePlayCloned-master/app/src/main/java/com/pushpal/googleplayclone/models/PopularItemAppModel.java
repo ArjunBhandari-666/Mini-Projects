@@ -1,4 +1,4 @@
-package com.pushpal.googleplayclone.models;
+package app.src.main.java.com.pushpal.googleplayclone.models;
 
 public class PopularItemAppModel {
     private int itemImage;
