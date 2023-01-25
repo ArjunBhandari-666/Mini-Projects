@@ -28,7 +28,7 @@ class CreateLoginForm extends JFrame implements ActionListener
     CreateLoginForm()  
     {     
         
-        JLabel background=new JLabel(new ImageIcon("Assets\\Sahyadri-Campus.jpg"));
+        JLabel background=new JLabel(new ImageIcon("DBMS-Mini-Project\\Assets\\Sahyadri-Campus.jpg"));
         background.setLayout(new FlowLayout(FlowLayout.CENTER));
         userLabel = new JLabel();  
         userLabel.setText("Login ID");  

@@ -47,10 +47,10 @@ class LoggedInEmp extends javax.swing.JFrame {
         MenuBar.setBackground(new java.awt.Color(204, 255, 204));
 
         UserProfileIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UserProfileIcon.setIcon(new javax.swing.ImageIcon("Assets//UserProfPic.png")); // NOI18N
+        UserProfileIcon.setIcon(new javax.swing.ImageIcon("DBMS-Mini-Project//Assets//UserProfPic.png")); // NOI18N
 
         WelcomeUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeUsername.setText("SSN HERE");
+        WelcomeUsername.setText("Welcome, "+u);
 
         DashboardLab.setBackground(new java.awt.Color(255, 255, 51));
         DashboardLab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -408,7 +408,7 @@ class LoggedInEmp extends javax.swing.JFrame {
             }
         });
 
-        SecurityLogo.setIcon(new javax.swing.ImageIcon("Assets//Security.png")); // NOI18N
+        SecurityLogo.setIcon(new javax.swing.ImageIcon("DBMS-Mini-Project//Assets//Security.png")); // NOI18N
 
         javax.swing.GroupLayout ContentPanelLayout = new javax.swing.GroupLayout(ContentPanel);
         ContentPanel.setLayout(ContentPanelLayout);
