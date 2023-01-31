@@ -1,20 +1,19 @@
-class LoggedIn 
+class LoggedIn
 {   
     String userName;
     LoggedIn(String role,String username)  
     { 
         if(role.equalsIgnoreCase("Student"))
         {
-            LoggedInStudent.main(username);
+            StudentCreateTicket.main(username);
         }
         else if(role.equalsIgnoreCase("Head"))
         {
-            LoggedInHead.main(username);
+            HeadAssignTickets.main(username);
         }
         else if(role.equalsIgnoreCase("Super"))
         {
-            LoggedInEmp.main(username);
+            SuperLogin.main(username);
         }
     }  
 }
-

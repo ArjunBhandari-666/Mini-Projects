@@ -1,5 +1,5 @@
 import java.sql.*; 
-public class CheckPassword {
+class CheckPassword {
  
     public static boolean password(String user,String pass) {
  

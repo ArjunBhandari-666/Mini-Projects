@@ -1,5 +1,5 @@
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
+// import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -7,8 +7,46 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*; 
 import java.lang.Exception;
-class TicketViewClass extends JFrame
-{
+import java.util.regex.*;
+public class RunQueriesStudent {
+    public static void runQuery(String q) {
+        Connection conn = null;
+        try 
+        {
+            Class.forName("oracle.jdbc.OracleDriver");
+            String dbURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+            String username = "sys as SYSDBA";
+            String password = "GAPS";
+            conn = DriverManager.getConnection(dbURL, username, password);
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            ex.printStackTrace();
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        } 
+        finally 
+        {
+            try 
+            {
+                if (conn != null && !conn.isClosed()) 
+                {
+                    Statement stmt=conn.createStatement();
+                    stmt.executeQuery(q);
+                }
+            }
+            catch (SQLException ex) 
+            {
+                ex.printStackTrace();
+            } 
+            catch (Exception ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
     public static void AllTickets(String u,JPanel TV)
     {
         TV.removeAll();
@@ -44,9 +82,9 @@ class TicketViewClass extends JFrame
     {
         JPanel Ticket=new JPanel();
         JLabel TicketID=new JLabel(),Title=new JLabel(),Status=new JLabel(),Description=new JLabel();
-        JButton Discard=new JButton(),Refresh=new JButton(),SeeDetails=new JButton();
-        Ticket.setBackground(new java.awt.Color(102, 102, 255));
-        Ticket.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        JButton Discard=new JButton(),Refresh=new JButton();
+        Ticket.setBackground(new java.awt.Color(51, 51, 255));
+        Ticket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         TicketID.setFont(new java.awt.Font("Segoe UI", 0, 18));
         TicketID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,9 +102,9 @@ class TicketViewClass extends JFrame
         Discard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(status.equalsIgnoreCase("Resolved"))
-                    RunQueriesStudent.createTicket("update ticket set userid='"+u+"-a' where ticketid ='"+ticketid+"'");
+                    RunQueriesStudent.runQuery("update ticket set userid='"+u+"-a' where ticketid ='"+ticketid+"'");
                 else
-                    RunQueriesStudent.createTicket("update ticket set userid='"+u+"-d' where ticketid ='"+ticketid+"'");
+                    RunQueriesStudent.runQuery("update ticket set userid='"+u+"-d' where ticketid ='"+ticketid+"'");
             }
         });
 
@@ -75,18 +113,10 @@ class TicketViewClass extends JFrame
         Refresh.setText("REFRESH");
         Refresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RunQueriesStudent.createTicket("update ticket set status='Pending' where ticketid ='"+ticketid+"'");
+                RunQueriesStudent.runQuery("update ticket set status='Pending' where ticketid ='"+ticketid+"'");
             }
         });
 
-        SeeDetails.setBackground(new java.awt.Color(255, 255, 102));
-        SeeDetails.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
-        SeeDetails.setText("View Details");
-        SeeDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                //See Comments on ticket
-            }
-        });
         Status.setFont(new java.awt.Font("Segoe UI", 0, 18));
         Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Status.setText(status);
@@ -139,41 +169,42 @@ class TicketViewClass extends JFrame
             TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TicketLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(TicketID, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(TicketLayout.createSequentialGroup()
-                        .addComponent(TicketID, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Status, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addGap(6, 6, 6)))
+                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Status, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TicketLayout.createSequentialGroup()
+                        .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addComponent(Discard, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TicketLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SeeDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Discard, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
         );
         TicketLayout.setVerticalGroup(
             TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TicketLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TicketID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Status, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Discard, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SeeDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TicketLayout.createSequentialGroup()
+                        .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Status, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TicketLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(Description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(TicketLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(TicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Discard, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(TicketID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         return Ticket;
     }
@@ -218,4 +249,68 @@ class TicketViewClass extends JFrame
         }
         return null;
     }
+    public static String changePasswordTo(String u,String c, String n) {
+        Connection conn = null;
+        System.out.print(u+c+n);
+        try 
+        {
+            Class.forName("oracle.jdbc.OracleDriver");
+            String dbURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+            String username = "sys as SYSDBA";
+            String password = "GAPS";
+            conn = DriverManager.getConnection(dbURL, username, password);
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            ex.printStackTrace();
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        } 
+        finally 
+        {
+            try 
+            {
+                if (conn != null && !conn.isClosed()) 
+                {
+                    if(!isValidPassword(n))
+                        return "<html>Invalid, use:<br>1. 8-20 Letters<br>2. Capital and Small letters<br>3. Digits";
+                    Statement stmt=conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select password from login where userid='"+u+"'");
+                    rs.next();
+                    if((c.toString()).equals(rs.getString("password")))
+                    {
+                        stmt=conn.createStatement();
+                        stmt.executeQuery("update login set password ='"+n+"' where userid='"+u+"'");
+                        return "UPDATED!!";
+                    }
+                    else 
+                    {
+                        return "<html>Incorrect <br>Current Password";
+                    }
+                }
+            }
+            catch (SQLException ex) 
+            {
+                ex.printStackTrace();
+            } 
+            catch (Exception ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
+        return "ERROR";
+    }
+    public static boolean isValidPassword(String password)
+    {
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        if (password == null) {
+            return false;
+        }
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
 }
+
