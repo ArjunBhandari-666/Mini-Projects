@@ -1,4 +1,6 @@
-import java.sql.*; 
+import java.sql.*;
+
+import oracle.jdbc.OracleDriver; 
 class CheckPassword {
  
     public static boolean password(String user,String pass) {
@@ -8,6 +10,7 @@ class CheckPassword {
         try 
         {
             Class.forName("oracle.jdbc.OracleDriver");
+            DriverManager.registerDriver(new OracleDriver());
             String dbURL = "jdbc:oracle:thin:@localhost:1521:orcl";
             String username = "sys as SYSDBA";
             String password = "GAPS";
