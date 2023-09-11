@@ -16,11 +16,11 @@ Welcome to the BE CSE Course Mini Projects Repository! This repository contains 
 
 2. **ReMinded: Reminder Mobile App**
    - Description: ReMinded is a mobile application designed to help users keep track of important items, documents, and tasks.
-   - Folder: [ReMinded](/projects/reminded)
+   - Folder: [ReMinded](/MAD-Mini-Project)
 
 3. **Trex 3D Game: Computer Graphics**
    - Description: The Trex 3D Game is a computer graphics mini project featuring an immersive game environment with multiple modes.
-   - Folder: [Trex 3D Game](/projects/trex-3d-game)
+   - Folder: [Trex 3D Game](/projects/CG-Mini-Project)
 
 ## Contributing
 
