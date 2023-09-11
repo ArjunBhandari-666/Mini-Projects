@@ -12,7 +12,7 @@ Welcome to the BE CSE Course Mini Projects Repository! This repository contains 
 
 1. **GAPS: Ticket Management System**
    - Description: GAPS (General Assistance and Problem Solving) is a ticket-based management system designed for colleges to facilitate communication between students and management for issue resolution.
-   - Folder: [GAPS](/projects/gaps)
+   - Folder: [GAPS](/DBMS-Mini-Project)
 
 2. **ReMinded: Reminder Mobile App**
    - Description: ReMinded is a mobile application designed to help users keep track of important items, documents, and tasks.
